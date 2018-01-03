@@ -1,3 +1,3 @@
 ### To restart webmin
-cd /etc/webmin
+cd /etc/webmin  
 ./start
