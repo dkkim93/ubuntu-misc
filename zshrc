@@ -82,14 +82,12 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Aliases
+alias matlab='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21 /usr/local/bin/matlab -desktop'
+alias op='xdg-open'
+alias pip='pip2'
+alias python3='python3.6'
+alias cdw='cd /home/dongki/research/lids/git/2018-h-LeCTR/2018-h-LeCTR'
 
 # For oh-my-zsh
 # ref: https://gist.github.com/renshuki/3cf3de6e7f00fa7e744a
@@ -99,8 +97,10 @@ eval `dircolors ~/.dir_colors/dircolors`
 export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}} 
 export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64\${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
-# For malloc error
-export LD_PRELOAD='/usr/lib/libtcmalloc_minimal.so.4'
+# For history
+HISTFILE=~/.zsh_history
+HISTSIZE=999999
+SAVEHIST=$HISTSIZE
 
-# For matlab
-alias matlab='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21 /usr/local/bin/matlab -desktop'
+# # For ros-kenetic
+# source /opt/ros/kinetic/setup.zsh

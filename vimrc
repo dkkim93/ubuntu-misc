@@ -153,3 +153,15 @@ nnoremap <M-up> :resize -5<cr>
 nnoremap <M-right> :vertical resize +5<cr>
 
 set number
+
+" To enable buffer history
+" ref: https://stackoverflow.com/questions/2732267/vim-loses-undo-history-when-changing-buffers
+set hidden
+
+" For vim-pathogen
+" ref: https://github.com/tpope/vim-pathogen
+execute pathogen#infect()
+
+" For flake8
+" ref: https://github.com/nvie/vim-flake8
+autocmd BufWritePost *.py call Flake8()
