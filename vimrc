@@ -151,3 +151,5 @@ nnoremap <M-left> :vertical resize -5<cr>
 nnoremap <M-down> :resize +5<cr>
 nnoremap <M-up> :resize -5<cr>
 nnoremap <M-right> :vertical resize +5<cr>
+
+set number
