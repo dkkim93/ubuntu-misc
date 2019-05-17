@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH=/home/dongki/.oh-my-zsh
 
@@ -9,85 +6,22 @@ export ZSH=/home/dongki/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="agnoster"
 
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git python pip)
+plugins=(git zsh-256color)
 
 source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Aliases
 alias matlab='LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21 /usr/local/bin/matlab -desktop'
 alias op='xdg-open'
 alias pip='pip2'
 alias python3='python3.6'
-alias cdw='cd /home/dongki/research/lids/git/2018-h-LeCTR/2018-h-LeCTR'
+alias cdw='cd /home/dongki/research/lids/git/2019-hierarchical-teach-v2/2018-hierarchical-teach'
+# alias cdw='cd /home/dongki/research/lids/git/opponent-modeling/opponent-modeling'
+alias journal='cd /home/dongki/research/lids/git/2017-avrl/branch/journal/src/tensorflow/GA3C'
 
 # For oh-my-zsh
 # ref: https://gist.github.com/renshuki/3cf3de6e7f00fa7e744a
@@ -102,5 +36,39 @@ HISTFILE=~/.zsh_history
 HISTSIZE=999999
 SAVEHIST=$HISTSIZE
 
+# Prevent duplicates in history
+setopt hist_ignore_all_dups hist_save_nodups
+
 # # For ros-kenetic
 # source /opt/ros/kinetic/setup.zsh
+
+# Python path for custom pkg
+# export PYTHONPATH=$PYTHONPATH:/home/dongki/research/lids/git/2018-hierarchical-teach/2018-hierarchical-teach/thirdparty/multiagent-particle-envs
+
+# IBM cloud
+. /usr/local/ibmcloud/bx/zsh_autocomplete
+source ~/research/ibm/set_env_vars.sh
+alias bxaws='aws --profile dongki --endpoint-url=http://s3-api.us-geo.objectstorage.softlayer.net'
+
+# Mujoco
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/dongki/.mujoco/mjpro150/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia-384
+export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libGLEW.so.1.13
+
+# # Rllab
+# export PYTHONPATH=/home/dongki/library/rllab:$PYTHONPATH
+
+# # For CASL
+# export LD_PRELOAD='/usr/lib/libtcmalloc_minimal.so.4'
+
+# For hiding user@hostname in zshrc
+DEFAULT_USER=`whoami`
+
+# For zsh autocomplete
+# ref: https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
+# Find color at: https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
+source ~/.oh-my-zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=241"
+
+# # For syntax highlight
+# source ~/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
