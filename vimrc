@@ -73,7 +73,6 @@ let g:ycm_autoclose_preview_window_after_completion=1
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set textwidth=79
 set expandtab
 set autoindent
 set fileformat=unix
@@ -81,6 +80,9 @@ set fileformat=unix
 " For finding with capital letters
 set ignorecase
 set smartcase
+
+" Set highlight search
+set hlsearch
 
 " For vim-airline
 set laststatus=2
