@@ -1,32 +1,33 @@
-set nocompatible
-filetype off    
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-pathogen'
+Plug 'preservim/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'kaicataldo/material.vim'
+Plug 'nvie/vim-flake8'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'airblade/vim-gitgutter'
+Plug 'kien/ctrlp.vim'
+call plug#end()
 
-" Vundle package
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" For PATHOGEN
+execute pathogen#infect()
+filetype plugin indent on
+syntax on
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'nvie/vim-flake8'
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'kien/ctrlp.vim'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'nathanaelkane/vim-indent-guides'
-
-call vundle#end()            
-filetype plugin indent on 
+" For material theme
+let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+let g:material_theme_style = 'default'
+colorscheme material
 
 " Horizontal split alias
 cnoreabbrev hs split
 
 " Show matching brackets
-set showmatch   
+set showmatch
 
 " Navigation between splits
 nnoremap <C-j> <C-W>j
@@ -46,28 +47,17 @@ nnoremap <silent> <M-right> :vertical resize +5<cr>
 " Toggle NERDTree like Sublime's sidebar
 map <silent> <C-n> :NERDTreeFocus<CR> " Switch focus to nerdtree shortcut
 
-" Set line number
-set nu
-
-" Color schemes
-set background=dark
-colorscheme solarized
-
 " Hide .pyc files in NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 " CTRL + P to ingore specific folders and files
-let g:ctrlp_custom_ignore = '\v[\/](venv|log|notebook|pretrain_model)|(\.(swp|ico|git|svn|npy))$'
+let g:ctrlp_custom_ignore='\v[\/](venv|log|notebook|pretrain_model)|(\.(swp|ico|git|svn|npy))$'
 
 " For syntax checker
 let python_highlight_all=1
-syntax on
 
-" For PEP8 checker
-autocmd BufWritePost *.py call Flake8()
-
-" For YouCompleteMe
-let g:ycm_autoclose_preview_window_after_completion=1
+" Set line number
+set nu
 
 " For autoindentation
 set tabstop=4
@@ -83,21 +73,15 @@ set smartcase
 
 " Set highlight search
 set hlsearch
+hi Search ctermbg=Black
+hi Search ctermfg=DarkRed
 
 " For vim-airline
-set laststatus=2
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
 let g:airline#extensions#tabline#enabled = 1
-if has("terminfo")
-   let &t_Co=16
-   let &t_AB="\<Esc>[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm"
-   let &t_AF="\<Esc>[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm"
-else
-   let &t_Co=16
-   let &t_Sf="\<Esc>[3%dm"
-   let &t_Sb="\<Esc>[4%dm"
-endif
+let g:airline_powerline_fonts = 1
+set laststatus=2
 
 " For vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
@@ -106,3 +90,22 @@ let g:indent_guides_guide_size=1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
+
+" Whitespace highlight
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+" For git Gutter
+let g:gitgutter_set_sign_backgrounds = 0
+set updatetime=100
+
+" For PEP8 checker
+autocmd BufWritePost *.py call Flake8()
+
+" For deoplete
+let g:deoplete#enable_at_startup = 1
+inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
